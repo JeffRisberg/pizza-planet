@@ -4,7 +4,7 @@
       <ppHeader></ppHeader>
     </div>
     <div class="container">
-      <ppHome></ppHome>
+      <ppMenu></ppMenu>
     </div>
     <div class="container">
       <ppFooter></ppFooter>
@@ -16,12 +16,14 @@
   import Header from './components/Header.vue'
   import Footer from './components/Footer.vue'
   import Home from './components/Home.vue'
+  import Menu from './components/Menu.vue'
 
   export default {
     components: {
       ppHeader: Header,
       ppFooter: Footer,
-      ppHome: Home
+      ppHome: Home,
+      ppMenu: Menu
     }
   }
 </script>

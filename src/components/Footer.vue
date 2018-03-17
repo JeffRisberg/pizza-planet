@@ -20,8 +20,4 @@
   header {
     margin-bottom: 10px;
   }
-
-  .navbar-brand {
-    font-size: 1.5em;
-  }
 </style>
