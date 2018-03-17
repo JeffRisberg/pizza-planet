@@ -20,7 +20,7 @@
               <td>Pepperoni</td>
               <td>
                 <button class="btn btn-outline-danger btn-sm"
-                  >x
+                >x
                 </button>
               </td>
             </tr>
@@ -60,15 +60,25 @@
         </table>
       </div>
     </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-sm-12 col-lg-6">
+        <pp-login></pp-login>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   import NewPizza from './NewPizza.vue'
+  import Login from './Login.vue'
 
   export default {
     components: {
-      ppNewPizza: NewPizza
+      ppNewPizza: NewPizza,
+      ppLogin: Login
     }
   }
 </script>
