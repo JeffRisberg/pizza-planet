@@ -15,12 +15,12 @@
               <th>Remove from menu</th>
             </tr>
           </thead>
-          <tbody v-for="item in getMenuItems" :key="item['.key']">
+          <tbody>
             <tr>
-              <td>{{ item.name }}</td>
+              <td>Pepperoni</td>
               <td>
                 <button class="btn btn-outline-danger btn-sm"
-                  @click="removeMenuItem(item['.key'])">x
+                  >x
                 </button>
               </td>
             </tr>

@@ -8,7 +8,9 @@ var config = {
   storageBucket: "pizza-planet-7e281.appspot.com",
   messagingSenderId: "836116087363"
 };
+
 const firebaseApp = Firebase.initializeApp(config);
 const db = firebaseApp.database()
+
 export const dbMenuRef = db.ref('menu')
 export const dbOrdersRef = db.ref('orders')
