@@ -15,7 +15,7 @@
           </tr>
           <tr v-for="option in item.options">
             <td>{{option.size}}</td>
-            <td>{{option.price}}</td>
+            <td>{{option.price | currency}}</td>
             <td>
               <button class="btn btn-sm btn-outline-success"
                 @click="addToBasket(item, option)"
@@ -26,7 +26,43 @@
         </tbody>
       </table>
     </div>
-    {{basket}}
+
+    <!-- shopping basket -->
+    <div class="col-sm-12 col-md-6">
+      <div v-if="basket.length > 0">
+        <table class="table">
+          <thead class="thead-default">
+            <tr>
+              <th>Quantity</th>
+              <th>Item</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody v-for="item in basket">
+            <tr>
+              <td>
+                <button class="btn btn-sm"
+                  type="button"
+                  @click="decreaseQuantity(item)">-
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button class="btn btn-sm"
+                  type="button"
+                  @click="increaseQuantity(item)">+
+                </button>
+              </td>
+              <td>{{ item.name }} {{ item.size }}"</td>
+              <td>{{ item.price * item.quantity | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Order total: {{ total | currency }}</p>
+        <button class="btn btn-success btn-block" @click="addNewOrder">Place Order</button>
+      </div>
+      <div v-else>
+        <p>{{ basketText }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,6 +71,7 @@
     data: function () {
       return {
         basket: [],
+        basketText: 'Your basket is empty',
         getMenuItems: {
           1: {
             'name': 'Margherita',
@@ -71,6 +108,16 @@
         }
       }
     },
+    computed: {
+      total() {
+        var totalCost = 0;
+        for (var items in this.basket) {
+          var individualItem = this.basket[ items ];
+          totalCost += individualItem.quantity * individualItem.price;
+        }
+        return totalCost
+      }
+    },
     methods: {
       addToBasket: function (item, option) {
         this.basket.push({
@@ -79,6 +126,25 @@
           size: option.size,
           quantity: 1
         })
+      },
+      removeFromBasket(item) {
+        this.basket.splice(this.basket.indexOf(item), 1);
+      },
+      increaseQuantity(item) {
+        item.quantity++;
+      },
+      decreaseQuantity(item) {
+        item.quantity--;
+
+        if (item.quantity === 0) {
+          this.removeFromBasket(item);
+        }
+      },
+      addNewOrder() {
+        // this.$store.commit('addOrder', this.basket)
+        dbOrdersRef.push(this.basket)
+        this.basket = []
+        this.basketText = "Thank you, your order has been placed! :)"
       }
     }
   }
