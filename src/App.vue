@@ -3,9 +3,25 @@
     <div class="container">
       <pp-header></pp-header>
     </div>
+
     <div class="container">
       <router-view></router-view>
     </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-4">
+          <router-view name="ordering"></router-view>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <router-view name="delivery"></router-view>
+        </div>
+        <div class="col-sm-12 col-md-4">
+          <router-view name="history"></router-view>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <pp-footer></pp-footer>
     </div>
@@ -25,5 +41,15 @@
 </script>
 
 <style>
+  header, footer {
+    background: #ECEEEF;
+    padding: 5px 0;
+    font-size: 1.2em;
+  }
 
+  .card {
+    background-color: #69AB64;
+    margin: 10px 0;
+    border-radius: 0;
+  }
 </style>

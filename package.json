@@ -10,6 +10,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "accounting": "^0.4.1",
+    "accounting-js": "^1.1.1",
     "firebase": "^4.8.1",
     "vue": "^2.5.11",
     "vue-router": "^3.0.1"
