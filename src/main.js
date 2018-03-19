@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import { routes } from './routes'
+import { store } from './store/store.js'
 import Accounting from 'accounting-js'
 import App from './App.vue'
 
@@ -26,5 +27,6 @@ Vue.filter('currency', function(val){
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
