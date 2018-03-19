@@ -109,6 +109,9 @@
       }
     },
     computed: {
+      getMenuItems() {
+        return this.$store.state.menuItems
+      },
       total() {
         var totalCost = 0;
         for (var items in this.basket) {
