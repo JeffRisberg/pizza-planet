@@ -110,7 +110,7 @@
     },
     computed: {
       getMenuItems() {
-        return this.$store.state.menuItems
+        return this.$store.getters.menuItems
       },
       total() {
         var totalCost = 0;
