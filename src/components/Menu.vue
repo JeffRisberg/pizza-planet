@@ -67,6 +67,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     data: function () {
       return {
@@ -75,9 +77,9 @@
       }
     },
     computed: {
-      getMenuItems() {
-        return this.$store.getters.getMenuItems
-      },
+      ...mapGetters ([
+        'getMenuItems'
+      ]),
       total() {
         var totalCost = 0;
         for (var items in this.basket) {
