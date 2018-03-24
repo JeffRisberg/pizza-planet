@@ -22,48 +22,48 @@
 </template>
 
 <script>
-import Firebase from 'firebase'
-// import { store } from '../store/index.js'
+  import Firebase from 'firebase'
+  import { store } from '../store/store.js'
 
-Firebase.auth().onAuthStateChanged(function(user) {
-  if(user) {
-      // store.dispatch('setUser', user)
-  } else {
-      //  store.dispatch('setUser', null)
-  }
-});
+  Firebase.auth().onAuthStateChanged(function (user) { // observer provided by Firebase
+    if (user) {
+      store.dispatch('setUser', user)
+    } else {
+      store.dispatch('setUser', null)
+    }
+  });
 
-export default {
-  methods: {
-    signIn() {
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
+  export default {
+    methods: {
+      signIn() {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
 
-      Firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        Firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
 
-        if (errorCode === 'auth/wrong-password' ) {
-          alert('Wrong password')
-        } else {
-          alert(errorMessage);
-        }
-      });
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password')
+          } else {
+            alert(errorMessage);
+          }
+        });
+      },
+      signOut() {
+        Firebase.auth().signOut().then(function () {
+          alert('logged out');
+        }).catch(function (error) {
+          alert('error.');
+        })
+      }
     },
-    signOut() {
-      Firebase.auth().signOut().then(function() {
-        alert('logged out');
-      }).catch(function(error) {
-        alert('error.');
-      })
-    }
-  },
-  computed: {
-    currentUser() {
-      return null; // return this.$store.getters.currentUser
+    computed: {
+      currentUser() {
+        return this.$store.getters.currentUser
+      }
     }
   }
-}
 
 </script>
 
