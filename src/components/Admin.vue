@@ -15,7 +15,7 @@
               <th>Remove from menu</th>
             </tr>
           </thead>
-          <tbody v-for="item in getMenuItems">
+          <tbody v-for="item in getMenuItems" :key="item['.key']">
             <tr>
               <td>{{item.name}}</td>
               <td>
