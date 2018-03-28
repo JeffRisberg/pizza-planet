@@ -1,4 +1,4 @@
-//import {firebaseAction} from 'vuexfire'
+import { firebaseAction } from 'vuexfire'
 
 const state = {
   orders: []
@@ -14,9 +14,9 @@ const getters = {
 }
 
 const actions = {
-  //setOrdersRef: firebaseAction(({bindFirebaseRef}, {ref}) => {
-  //  bindFirebaseRef('orders', ref)
-  //})
+  setOrdersRef: firebaseAction(({ bindFirebaseRef }, { ref }) => {
+    bindFirebaseRef('orders', ref)
+  })
 }
 
 export default {

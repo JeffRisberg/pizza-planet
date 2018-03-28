@@ -84,8 +84,7 @@
     computed: {
       ...mapGetters([
         'getMenuItems',
-        'numberOfItems'
-      ])
+        'numberOfOrders'      ])
     }
   }
 </script>
