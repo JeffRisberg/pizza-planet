@@ -57,7 +57,6 @@
   import { dbMenuRef } from '../firebaseConfig'
 
   export default {
-    components: {dbMenuRef},
     data() {
       return {
         newPizza: {

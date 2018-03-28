@@ -9,17 +9,17 @@
             <th>Add to basket</th>
           </tr>
         </thead>
-        <tbody v-for="item in getMenuItems">
+        <tbody v-for="item in getMenuItems" :key="item['.key']">
           <tr>
-            <td><strong>{{item.name}}</strong></td>
+            <td><strong>{{ item.name }}</strong></td>
           </tr>
           <tr v-for="option in item.options">
-            <td>{{option.size}}</td>
-            <td>{{option.price | currency}}</td>
+            <td>{{ option.size }}</td>
+            <td>{{ option.price | currency }}</td>
             <td>
               <button class="btn btn-sm btn-outline-success"
-                @click="addToBasket(item, option)"
-                type="button">+
+                type="button"
+                @click="addToBasket( item, option )">+
               </button>
             </td>
           </tr>
@@ -51,7 +51,7 @@
                   @click="increaseQuantity(item)">+
                 </button>
               </td>
-              <td>{{ item.name }} {{ item.size }}"</td>
+              <td>{{ item.name}} {{ item.size }}"</td>
               <td>{{ item.price * item.quantity | currency }}</td>
             </tr>
           </tbody>
@@ -60,7 +60,7 @@
         <button class="btn btn-success btn-block" @click="addNewOrder">Place Order</button>
       </div>
       <div v-else>
-        <p>{{ basketText }}</p> {{this.$store.state.orders}}
+        <p>{{ basketText }}</p>
       </div>
     </div>
   </div>
@@ -68,29 +68,30 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import { dbOrdersRef } from '../firebaseConfig'
 
   export default {
-    data: function () {
+    data() {
       return {
         basket: [],
-        basketText: 'Your basket is empty'
+        basketText: 'Your basket is empty!'
       }
     },
     computed: {
-      ...mapGetters ([
+      ...mapGetters([
         'getMenuItems'
       ]),
       total() {
         var totalCost = 0;
         for (var items in this.basket) {
-          var individualItem = this.basket[items];
+          var individualItem = this.basket[ items ];
           totalCost += individualItem.quantity * individualItem.price;
         }
         return totalCost
       }
     },
     methods: {
-      addToBasket: function (item, option) {
+      addToBasket(item, option) {
         this.basket.push({
           name: item.name,
           price: option.price,
@@ -112,8 +113,8 @@
         }
       },
       addNewOrder() {
-        this.$store.commit('addOrder', this.basket)
-        //dbOrdersRef.push(this.basket)
+        // this.$store.commit('addOrder', this.basket)
+        dbOrdersRef.push(this.basket)
         this.basket = []
         this.basketText = "Thank you, your order has been placed! :)"
       }

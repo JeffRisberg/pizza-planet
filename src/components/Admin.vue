@@ -20,7 +20,7 @@
               <td>{{item.name}}</td>
               <td>
                 <button class="btn btn-outline-danger btn-sm"
-                >x
+                  @click="removeMenuItem(item['.key'])">x
                 </button>
               </td>
             </tr>
@@ -31,8 +31,8 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <h3>Current orders: {{numberOfOrders}}</h3>
-        <table class="table table-sm">
+        <h3>Current orders: {{ numberOfOrders }}</h3>
+        <table class="table table-sm" v-for="(orders, index) in getOrders" :key="orders['.key']">
 
           <thead class="thead-default">
             <tr>
@@ -44,16 +44,19 @@
           </thead>
 
           <tbody>
+
             <div class="order-number">
-              <strong><em>Order Number:</em></strong>
-              <button class="btn btn-outline-danger btn-sm">x</button>
+              <strong><em>Order Number: {{ index +1 }}</em></strong>
+              <button class="btn btn-outline-danger btn-sm"
+                @click="removeOrderItem(orders['.key'])">x
+              </button>
             </div>
 
-            <tr>
-              <td>Name</td>
-              <td>Size</td>
-              <td>Quatity</td>
-              <td>Price</td>
+            <tr v-for="orderItems in orders['.value']">
+              <td>{{ orderItems.name }}</td>
+              <td>{{ orderItems.size }}"</td>
+              <td>{{ orderItems.quantity }}</td>
+              <td>{{ orderItems.price | currency }}</td>
             </tr>
           </tbody>
 
@@ -75,6 +78,7 @@
   import NewPizza from './NewPizza.vue'
   import Login from './Login.vue'
   import { mapGetters } from 'vuex'
+  import { dbMenuRef, dbOrdersRef } from '../firebaseConfig'
 
   export default {
     components: {
@@ -83,8 +87,18 @@
     },
     computed: {
       ...mapGetters([
+        'numberOfOrders',
         'getMenuItems',
-        'numberOfOrders'      ])
-    }
+        'getOrders'
+      ])
+    },
+    methods: {
+      removeMenuItem(key) {
+        dbMenuRef.child(key).remove()
+      },
+      removeOrderItem(key) {
+        dbOrdersRef.child(key).remove()
+      }
+    },
   }
 </script>
