@@ -84,7 +84,7 @@
       total() {
         var totalCost = 0;
         for (var items in this.basket) {
-          var individualItem = this.basket[ items ];
+          var individualItem = this.basket[items];
           totalCost += individualItem.quantity * individualItem.price;
         }
         return totalCost
