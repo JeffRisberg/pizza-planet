@@ -15,7 +15,7 @@
   import Login from './Login.vue'
   import { mapGetters } from 'vuex'
 
-  //dynamic import
+  // dynamic import
   const AdminHidden = () => import('./AdminHidden.vue')
 
   export default {
