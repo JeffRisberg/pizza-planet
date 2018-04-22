@@ -6,7 +6,7 @@
 
     <div class="container">
       <router-view></router-view>
-      <global-components />
+      <global-component></global-component>
     </div>
 
     <div class="container">
