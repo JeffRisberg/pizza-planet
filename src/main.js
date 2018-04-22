@@ -24,13 +24,7 @@ Vue.filter('currency', function(val){
   return Accounting.formatMoney(val)
 })
 
-Vue.component('global-component', function (resolve, reject) {
-  setTimeout(function () {
-    resolve({
-      template: '<div>a global component</div>'
-    })
-  }, 2000)
-})
+//Vue.component('global-component', () => import('./components/Menu.vue'))
 
 new Vue({
   el: '#app',
